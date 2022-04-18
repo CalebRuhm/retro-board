@@ -4,11 +4,16 @@ import { DragDropContext } from "react-beautiful-dnd"
 
 export default function Boards() {
 
-  const [title, setTitle ] = useState("Todo");
+  const [title, setTitle] = useState("Click Me");
   const [input, setInput] = useState("hidden");
 
   const changeTitle = () => {
-    setInput("text");
+    if (input === "hidden") {
+      setInput("text")
+    }
+    else {
+      setInput("hidden")
+    }
   }
 
   return (
@@ -16,7 +21,7 @@ export default function Boards() {
       <div className="Container">
           <form className="Form">
             <label onClick={changeTitle}>{title}</label>
-            <input type={input} onChange={((e) => setTitle(e.target.value))}></input>
+            <input placeholder = "Title" type={input} onChange={((e) => setTitle(e.target.value))}></input>
           </form>
       </div>
     </div>
