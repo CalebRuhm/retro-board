@@ -22,6 +22,7 @@ export default function Boards() {
           <form className="Form">
             <label onClick={changeTitle}>{title}</label>
             <input placeholder = "Title" type={input} onChange={((e) => setTitle(e.target.value))}></input>
+            <button>Add</button>
           </form>
       </div>
     </div>
