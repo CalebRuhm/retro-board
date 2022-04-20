@@ -2,7 +2,7 @@
 
 .Board {
   max-width: 100vw;
-  
+
   .Form {
     font-size: 1.5em;
     width: 100vw;
@@ -62,13 +62,13 @@
           cursor: pointer;
           margin: 10px 0px 15px 0px;
           transition: 0.2s ease;
-          
-           &:hover {
+
+          &:hover {
             transform: scale(1.2);
             transition: 0.2s ease;
           }
         }
-      };
+      }
     }
   }
 }
