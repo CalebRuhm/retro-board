@@ -3,6 +3,8 @@ import { React, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export default function Boards() {
+  const [content, setContent] = useState("");
+
   const [data, setData] = useState([
     {
       id: 1,
@@ -26,11 +28,13 @@ export default function Boards() {
     },
     { id: 4, title: "Ideas", content: ["Find new library"] },
   ]);
-
+  
+  console.log(content);
   console.log(data);
 
-  const formSubmit = (event) => {
-    event.preventDefault();
+  const formSubmit = (e) => {
+    e.preventDefault();
+    setData(...data, content)
   };
 
   return (
@@ -44,7 +48,17 @@ export default function Boards() {
                 {data.content.map((content) => {
                   return <p className="p">{content}</p>;
                 })}
-                <button className="button">+</button>
+                <div className="add">
+                  <input
+                    type="text"
+                    placeholder="Add item"
+                    value={content}
+                    onChange={((e) => setContent(e.target.value))}
+                  />
+                  <button type="submit" className="button">
+                    +
+                  </button>
+                </div>
               </div>
             );
           })}
