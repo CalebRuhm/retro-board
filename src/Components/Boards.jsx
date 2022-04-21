@@ -24,13 +24,10 @@ export default function Boards() {
     {
       id: 3,
       title: "Finished",
-      content: ["Eat Breakfast", "Fix bike"],
+      content: ["Eat breakfast", "Fix bike"],
     },
     { id: 4, title: "Ideas", content: ["Find new library"] },
   ]);
-  
-  console.log(content);
-  console.log(data);
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -38,11 +35,12 @@ export default function Boards() {
 
   const addContent = (e, idx) => {
     setContent(e);
-    console.log(content);
-    // setData({
-    //   ...data, [data[idx].content]: e
-    // })
-  }
+    data[idx].content.map((content) => {
+      return console.log(content);
+    });
+  };
+
+  const deleteContent = () => {};
 
   return (
     <div className="Board">
@@ -55,8 +53,8 @@ export default function Boards() {
                 {data.content.map((content) => {
                   return (
                     <div className="row">
-                      <button>✖</button>
-                      <p >{content}</p>
+                      <button onClick={deleteContent}>✖</button>
+                      <p>{content}</p>
                     </div>
                   );
                 })}
@@ -65,7 +63,7 @@ export default function Boards() {
                     type="text"
                     placeholder="Add item"
                     value={content}
-                    onChange={((e) => addContent(e.target.value, idx))}
+                    onChange={(e) => addContent(e.target.value, idx)}
                   />
                   <button type="submit" className="button">
                     +
