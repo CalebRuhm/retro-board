@@ -49,7 +49,7 @@ export default function Boards() {
   const card = {
     id: 5,
     title: "what",
-    content: ["idk"],
+    content: ["idk", "help pls"],
   };
 
   const deleteContent = () => {};
