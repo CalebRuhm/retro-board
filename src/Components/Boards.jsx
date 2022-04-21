@@ -35,9 +35,21 @@ export default function Boards() {
 
   const addContent = (e, idx) => {
     setContent(e);
-    data[idx].content.map((content) => {
-      return console.log(content);
-    });
+    console.log(content);
+    console.log(data[idx].content);
+  };
+
+  const addCard = (card) => {
+    console.log(card);
+    // setData([
+    // ...data,[ card]
+    // ])
+  };
+
+  const card = {
+    id: 5,
+    title: "what",
+    content: ["idk"],
   };
 
   const deleteContent = () => {};
@@ -72,6 +84,12 @@ export default function Boards() {
               </div>
             );
           })}
+        </div>
+        <div className="newCard">
+          <p>New Card</p>
+          <button type="submit" onClick={addCard(card)}>
+            +
+          </button>
         </div>
       </form>
     </div>
