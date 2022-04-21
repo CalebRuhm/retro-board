@@ -32,9 +32,11 @@ export default function Boards() {
   console.log(content);
   console.log(data);
 
-  const formSubmit = (e) => {
+  const formSubmit = (e, idx) => {
     e.preventDefault();
-    setData(...data, content)
+    // setData([
+    //   ...data, content
+    // ])
   };
 
   return (
