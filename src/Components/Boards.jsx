@@ -32,30 +32,40 @@ export default function Boards() {
   console.log(content);
   console.log(data);
 
-  const formSubmit = (e, idx) => {
+  const formSubmit = (e) => {
     e.preventDefault();
-    // setData([
-    //   ...data, content
-    // ])
   };
+
+  const addContent = (e, idx) => {
+    setContent(e);
+    console.log(content);
+    // setData({
+    //   ...data, [data[idx].content]: e
+    // })
+  }
 
   return (
     <div className="Board">
       <form className="Form" onSubmit={formSubmit}>
         <div className="container">
-          {data.map((data) => {
+          {data.map((data, idx) => {
             return (
               <div className="Card">
                 <h1 className="title">{data.title}</h1>
                 {data.content.map((content) => {
-                  return <p className="p">{content}</p>;
+                  return (
+                    <div className="row">
+                      <button>✖</button>
+                      <p >{content}</p>
+                    </div>
+                  );
                 })}
                 <div className="add">
                   <input
                     type="text"
                     placeholder="Add item"
                     value={content}
-                    onChange={((e) => setContent(e.target.value))}
+                    onChange={((e) => addContent(e.target.value, idx))}
                   />
                   <button type="submit" className="button">
                     +
