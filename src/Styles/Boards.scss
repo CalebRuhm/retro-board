@@ -86,6 +86,12 @@
             background-color: $lightgrey;
             padding: 10px;
             color: white;
+            transition: 1.2s ease;
+
+            &:focus {
+              transition: 1.2s ease;
+              outline: 1px solid $purple;
+            }
           }
 
           .button {
