@@ -8,7 +8,6 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 export default function Boards() {
   const [data, setData] = useState([
     {
-      id: 1,
       title: "To do",
       content: [
         "Fix bugs in program",
@@ -19,18 +18,16 @@ export default function Boards() {
       newContent: "",
     },
     {
-      id: 2,
       title: "In Progress",
       content: ["Fix coffee maker", "Finish planting garden"],
       newContent: "",
     },
     {
-      id: 3,
       title: "Finished",
       content: ["Eat breakfast", "Fix bike"],
       newContent: "",
     },
-    { id: 4, title: "Ideas", content: ["Find new library"], newContent: "" },
+    { title: "Ideas", content: ["Find new library"], newContent: "" },
   ]);
 
   const formSubmit = (e) => {
@@ -48,17 +45,31 @@ export default function Boards() {
     setData([...data]);
   };
 
-  const deleteContent = (idx,  contentIdx) => {
-    data[idx].content = data[idx].content.filter((item, newContentIdx) =>(
-      newContentIdx !== contentIdx
-    ));
+  const deleteContent = (idx, contentIdx) => {
+    data[idx].content = data[idx].content.filter(
+      (item, newContentIdx) => newContentIdx !== contentIdx
+    );
     setData([...data]);
-
   };
 
-  const addCard = () => {};
+  const addCard = (card) => {
+    data.push(card);
+    setData([...data]);
+  };
 
-  const deleteCard = () => {};
+  const card = {
+    title: "New Card",
+    content: ["Item 1", "Item 2", "Item 3"],
+    newContent: "",
+  };
+
+  const deleteCard = (idx) => {
+     const result = data.filter((card, cardIdx) => (
+      cardIdx !== idx
+    ));
+    console.log(result);
+    setData([...result]);
+  };
 
   const editCard = () => {};
 
@@ -79,7 +90,7 @@ export default function Boards() {
                   <FontAwesomeIcon
                     className="trash"
                     icon={faTrash}
-                    onClick={deleteCard}
+                    onClick={() => deleteCard(idx)}
                   />
                 </div>
                 {newData.content.map((newContent, contentIdx) => {
@@ -113,7 +124,7 @@ export default function Boards() {
         </div>
         <div className="newCard">
           <p>New Card</p>
-          <button type="submit" onClick={addCard}>
+          <button type="submit" onClick={() => addCard(card)}>
             +
           </button>
         </div>
