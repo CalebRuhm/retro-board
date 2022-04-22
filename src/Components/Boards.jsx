@@ -42,23 +42,13 @@ export default function Boards() {
     console.log(data[idx].content);
   };
 
-  const addCard = (card) => {
-    console.log(card);
-    // setData([
-    // ...data,[ card]
-    // ])
-  };
-
-  const card = {
-    id: 5,
-    title: "what",
-    content: ["idk", "help pls"],
-  };
-
+  
   const deleteContent = () => {};
+  
+  const addCard = () => {};
 
   const deleteCard = () => {};
-
+  
   const editCard = () => {};
 
   return (
@@ -106,7 +96,7 @@ export default function Boards() {
         </div>
         <div className="newCard">
           <p>New Card</p>
-          <button type="submit" onClick={addCard(card)}>
+          <button type="submit" onClick={addCard}>
             +
           </button>
         </div>
