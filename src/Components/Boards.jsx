@@ -1,6 +1,9 @@
 import "../Styles/Boards.scss";
 import { React, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default function Boards() {
   const [content, setContent] = useState("");
@@ -54,6 +57,10 @@ export default function Boards() {
 
   const deleteContent = () => {};
 
+  const deleteCard = () => {};
+
+  const editCard = () => {};
+
   return (
     <div className="Board">
       <form className="Form" onSubmit={formSubmit}>
@@ -61,7 +68,19 @@ export default function Boards() {
           {data.map((data, idx) => {
             return (
               <div className="Card">
-                <h1 className="title">{data.title}</h1>
+                <div className="titleContainer">
+                  <FontAwesomeIcon
+                    className="edit"
+                    icon={faPenToSquare}
+                    onClick={editCard}
+                  />
+                  <h1 className="title">{data.title}</h1>
+                  <FontAwesomeIcon
+                    className="trash"
+                    icon={faTrash}
+                    onClick={deleteCard}
+                  />
+                </div>
                 {data.content.map((content) => {
                   return (
                     <div className="row">
