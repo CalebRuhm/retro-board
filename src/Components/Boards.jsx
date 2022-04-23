@@ -7,28 +7,28 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default function Boards() {
   const [input, setInput] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [data, setData] = useState([
     {
       title: "To do",
+      newTitle: "",
       content: [
-        "Fix bugs in program",
-        "Make site reactive",
-        "No idea",
-        "Make tea",
+        "Pretend to work on ticket #6380",
+        "Shave",
+        "Get Jeff Fired",
       ],
       newContent: "",
     },
     {
       title: "In Progress",
-      content: ["Fix coffee maker", "Finish planting garden"],
+      content: ["Bug manager to fix coffee maker!", "Develop ploy to get Jeff fired"],
       newContent: "",
     },
     {
       title: "Finished",
-      content: ["Eat breakfast", "Fix bike"],
+      content: ["Learn how to code haphazardly so my boss doesn't fire me and fires Jeff instead", "Eat lunch"],
       newContent: "",
     },
-    { title: "Ideas", content: ["Find new library"], newContent: "" },
   ]);
 
   const formSubmit = (e) => {
@@ -70,11 +70,23 @@ export default function Boards() {
     setData([...result]);
   };
 
-  const editCardTitle = (idx) => {};
+  const editCardTitle = (idx, e) => {
+    console.log(idx);
+    console.log(e.target.value);
+    data[idx].newTitle = e.target.value;
+    setData([...data]);
+  };
+
+  const setCardTitle = (idx) => {
+    data[idx].title = data[idx].newTitle;
+    data[idx].newTitle = "";
+    setData([...data]);
+  };
 
   const inputChange = () => {
-    setInput(!input)
-  }
+    setInput(!input);
+    setHidden(!hidden);
+  };
 
   return (
     <div className="Board">
@@ -96,13 +108,20 @@ export default function Boards() {
                     onClick={() => deleteCard(idx)}
                   />
                 </div>
-                <input
-                  className="titleInput"
-                  type={input ? "text" : "hidden"}
-                  placeholder="Change Title"
-                  value=""
-                  onChange=""
-                ></input>
+                <div className="titleEdit">
+                  <input
+                    className="titleInput"
+                    type={input ? "text" : "hidden"}
+                    placeholder="Change Title"
+                    value={data[idx].newTitle}
+                    onChange={(e) => editCardTitle(idx, e)}
+                  ></input>
+                  {hidden && 
+                  <button type="submit"  onClick={() => setCardTitle(idx)}>
+                    ✓
+                  </button>
+                  }
+                </div>
                 {newData.content.map((newContent, contentIdx) => {
                   return (
                     <div className="row">
