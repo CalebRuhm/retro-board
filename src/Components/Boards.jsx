@@ -6,6 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default function Boards() {
+  const [input, setInput] = useState(false);
   const [data, setData] = useState([
     {
       title: "To do",
@@ -64,14 +65,16 @@ export default function Boards() {
   };
 
   const deleteCard = (idx) => {
-     const result = data.filter((card, cardIdx) => (
-      cardIdx !== idx
-    ));
+    const result = data.filter((card, cardIdx) => cardIdx !== idx);
     console.log(result);
     setData([...result]);
   };
 
-  const editCard = () => {};
+  const editCardTitle = (idx) => {};
+
+  const inputChange = () => {
+    setInput(!input)
+  }
 
   return (
     <div className="Board">
@@ -84,7 +87,7 @@ export default function Boards() {
                   <FontAwesomeIcon
                     className="edit"
                     icon={faPenToSquare}
-                    onClick={editCard}
+                    onClick={inputChange}
                   />
                   <h1 className="title">{newData.title}</h1>
                   <FontAwesomeIcon
@@ -93,6 +96,13 @@ export default function Boards() {
                     onClick={() => deleteCard(idx)}
                   />
                 </div>
+                <input
+                  className="titleInput"
+                  type={input ? "text" : "hidden"}
+                  placeholder="Change Title"
+                  value=""
+                  onChange=""
+                ></input>
                 {newData.content.map((newContent, contentIdx) => {
                   return (
                     <div className="row">
