@@ -2,6 +2,7 @@
 
 .Board {
   max-width: 100vw;
+  max-height: 100vh;
 
   .Form {
     font-size: 1.5em;
@@ -13,6 +14,8 @@
       display: flex;
       justify-content: center;
       padding: 20px;
+      padding: 0;
+      margin: 0;
 
       .Card {
         background-color: #333;
@@ -61,7 +64,6 @@
 
           .title {
             font-size: 1.3em;
-            cursor: pointer;
             text-align: center;
           }
         }
@@ -126,7 +128,6 @@
 
           p {
             font-size: 0.6em;
-            cursor: pointer;
             line-height: 1.2;
           }
 
