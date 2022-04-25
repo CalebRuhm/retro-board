@@ -68,13 +68,10 @@ export default function Boards() {
 
   const deleteCard = (idx) => {
     const result = data.filter((card, cardIdx) => cardIdx !== idx);
-    console.log(result);
     setData([...result]);
   };
 
   const editCardTitle = (idx, e) => {
-    console.log(idx);
-    console.log(e.target.value);
     data[idx].newTitle = e.target.value;
     setData([...data]);
   };
@@ -97,14 +94,10 @@ export default function Boards() {
           {data.map((newData, idx) => {
             return (
               <DragDropContext>
-                <Droppable droppableId="data">
+                <Droppable droppableId="newData">
                   {(provided) => {
                     return (
-                      <div
-                        className="Card"
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                      >
+                      <div className="Card" {...provided.droppableProps} ref={provided.innerRef}>
                         <div className="titleContainer">
                           <FontAwesomeIcon
                             className="edit"
@@ -138,7 +131,7 @@ export default function Boards() {
                         {newData.content.map((newContent, contentIdx) => {
                           return (
                             <Draggable
-                              draggableId={"content"}
+                              draggableId="content"
                               index={contentIdx}
                               key={contentIdx}
                             >
@@ -146,8 +139,8 @@ export default function Boards() {
                                 return (
                                   <div
                                     className="row"
-                                    {...provided.dragHandleProps}
                                     {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
                                     ref={provided.innerRef}
                                   >
                                     <button
@@ -164,6 +157,7 @@ export default function Boards() {
                             </Draggable>
                           );
                         })}
+                        {provided.placeholder}
 
                         <div className="add">
                           <input
