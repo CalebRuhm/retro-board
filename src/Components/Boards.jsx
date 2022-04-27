@@ -8,6 +8,8 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 export default function Boards() {
   const [input, setInput] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [clicked, setClicked] = useState(null);
+  const [unclicked, setUnclicked] = useState(null);
   const [data, setData] = useState([
     {
       title: "To do",
@@ -19,7 +21,7 @@ export default function Boards() {
       title: "In Progress",
       content: [
         "Bug manager to fix coffee maker!",
-        "Develop ploy to get Jeff fired",
+        "Develop ploy to get Jeff fired"
       ],
       newContent: "",
     },
@@ -87,17 +89,31 @@ export default function Boards() {
     setHidden(!hidden);
   };
 
+  const dragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(data);
+    const [reorderedItem] = items[clicked].content.splice(result.source.index, 1);
+    items[unclicked].content.splice(result.destination.index, 0, reorderedItem);
+    setData(items)
+  }
+
   return (
     <div className="Board">
       <form className="Form" onSubmit={formSubmit}>
-        <div className="container">
-          {data.map((newData, idx) => {
-            return (
-              <DragDropContext>
-                <Droppable droppableId="newData">
-                  {(provided) => {
+        <DragDropContext onDragEnd={dragEnd}
+        >
+          <Droppable droppableId="cards">
+            {(provided) => {
+              return (
+                <div
+                  className="container"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {data.map((newData, idx) => {
                     return (
-                      <div className="Card" {...provided.droppableProps} ref={provided.innerRef}>
+                      <div className="Card" onMouseDown={() => setClicked(idx)} onMouseUp={() => setUnclicked(idx)}>
                         <div className="titleContainer">
                           <FontAwesomeIcon
                             className="edit"
@@ -131,17 +147,17 @@ export default function Boards() {
                         {newData.content.map((newContent, contentIdx) => {
                           return (
                             <Draggable
-                              draggableId="content"
-                              index={contentIdx}
                               key={contentIdx}
+                              index={contentIdx}
+                              draggableId={newContent}
                             >
                               {(provided) => {
                                 return (
                                   <div
                                     className="row"
-                                    {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     ref={provided.innerRef}
+                                    {...provided.draggableProps}
                                   >
                                     <button
                                       onClick={() =>
@@ -176,12 +192,12 @@ export default function Boards() {
                         </div>
                       </div>
                     );
-                  }}
-                </Droppable>
-              </DragDropContext>
-            );
-          })}
-        </div>
+                  })}
+                </div>
+              );
+            }}
+          </Droppable>
+        </DragDropContext>
         <div className="newCard">
           <p>New Card</p>
           <button type="submit" onClick={() => addCard(card)}>
